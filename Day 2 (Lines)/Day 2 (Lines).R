@@ -1,18 +1,16 @@
 # Libraries
-library(readxl)
-library(jsonlite)
+library(geojsonio)
+library(tidyverse)
 library(rgeos)
 library(showtext)
 library(sysfonts)
-library(stringr)
 library(cowplot)
 library(sf)
-library(broom)
 
 # Cities
 Barcelona <- geojson_sf("~/Desktop/Day 2 Lines/Data/Bike Routes Barcelona.geojson")
 Berlin <- geojson_sf("~/Desktop/Day 2 Lines/Data/Bike Routes Berlin.geojson")
-Chicago <- geojson_sf("~/Desktop/Day 2 LinesData//Bike Routes Chicago.geojson")
+Chicago <- geojson_sf("~/Desktop/Day 2 Lines/Data/Bike Routes Chicago.geojson")
 London <- geojson_sf("~/Desktop/Day 2 Lines/Data/Bike Routes London.geojson")
 Melbourne <- geojson_sf("~/Desktop/Day 2 Lines/Data/Bicycle Routes Melbourne.geojson")
 Milan <- geojson_sf("~/Desktop/Day 2 Lines/Data/Bike Routes Milan.geojson")
@@ -86,7 +84,7 @@ TorontoPlot <- ggplot() +
   theme(plot.margin = margin(topmargin, 1, 0, 1, unit="cm"))
 
 # Makes Main grid
-GridPlot <- grid <- plot_grid(BarcelonaPlot, BerlinPlot, ChicagoPlot, 
+GridPlot <- plot_grid(BarcelonaPlot, BerlinPlot, ChicagoPlot, 
                               LondonPlot, MelbournePlot, MilanPlot, 
                               NycPlot, SydneyPlot, TorontoPlot,
                               nrow = 3, ncol = 3) +
