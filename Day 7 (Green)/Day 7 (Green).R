@@ -84,13 +84,13 @@ plot_grid(plotter("Multifamily Housing"),
   theme(plot.margin = margin(13, 2, 2, 2, "cm"),
         plot.background = element_rect(fill="#fdf9f5", color="#fdf9f5"),
         panel.background = element_rect(fill="#fdf9f5", color="#fdf9f5")) +
-  annotate(geom="text", label="Energy Scores of Buildings in Manhattan", x=0.5, y=1.42, size=125, family=font1, fontface="bold", color="#002b11") +
-  annotate(geom="text", label="Maps show the Energy Scores of buildings covered under Local Law 84 in Manhattan. Energy Scores show efficiency of energy consumption on a scale of 1 (low) to 100 (high).", x=0.5, y=1.295, size=40, family=font2, color="#00441B") +
+  annotate(geom="text", label="Energy Star Scores of Buildings in Manhattan", x=0.5, y=1.42, size=125, family=font1, fontface="bold", color="#002b11") +
+  annotate(geom="text", label="Maps show the Energy Star Scores of buildings covered under Local Law 84 in Manhattan. Energy Star Scores show efficiency of energy consumption on a scale of 1 (low) to 100 (high).", x=0.5, y=1.295, size=40, family=font2, color="#00441B") +
   annotate(geom="text", label="Twitter: @BlakeRobMills | Source: NYC Open Data | GitHub: BlakeRMills", x=0.5, y=-0.05, size=23, family=font1, fontface="bold", color="#00441B") +
   annotate(geom="text", label="More Efficient", x=0.567, y=1.205, size=25, family=font2, color="#00441B") +
   annotate(geom="text", label="Less Efficient", x=0.397, y=1.205, size=25, family=font2, color="#238B45") +
-  annotate(geom="text", label="Energy Score", x=0.483, y=1.2, size=42, family=font1, fontface="bold", color="#00441B") +
-  annotate(geom="text", label="1", x=0.351, y=1.03, size=28, family=font2, color="#C7E9C0") +
+  annotate(geom="text", label="Energy Star Score", x=0.483, y=1.205, size=32, family=font1, fontface="bold", color="#00441B") +
+  annotate(geom="text", label="1", x=0.351, y=1.03, size=28, family=font2, color="#A1D99B") +
   annotate(geom="text", label="25", x=0.417, y=1.03, size=28, family=font2, color="#74C476") +
   annotate(geom="text", label="50", x=0.483, y=1.03, size=28, family=font2, color="#238B45") +
   annotate(geom="text", label="75", x=0.55, y=1.03, size=28, family=font2, color="#006D2C") +
@@ -106,5 +106,3 @@ plot_grid(plotter("Multifamily Housing"),
 
 # Save
 ggsave("~/Desktop/BuildingScores.png", height = 16, width=35)
-
-
