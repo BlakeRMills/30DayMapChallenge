@@ -106,3 +106,5 @@ plot_grid(plotter("Multifamily Housing"),
 
 # Save
 ggsave("~/Desktop/BuildingScores.png", height = 16, width=35)
+
+
