@@ -8,7 +8,7 @@ library(sysfonts)
 
 # Aes
 showtext_auto()
-Colors <- c("#0d0649", "#243e8a", "#3b5fa7", "#80b2d7", "#a7cae3")
+Colors <- c("#0d0649", "#243e8a", "#3b5fa7", "#6ea3ca", "#a7cae3")
 font_add_google("Quicksand")
 font_add_google("Fira Sans")
 font1 <- "Fira Sans"
@@ -319,11 +319,8 @@ ggdraw(MainGrid) +
   draw_label(x=0.042, y=0.83, label = "BIKE\nLANES", color=Colors[1], size=200, fontfamily=font2, fontface="bold", angle = 90, lineheight = 0.28) +
   draw_label(x=0.042, y=0.65, label = "GREEN\nSPACE", color=Colors[2], size=200, fontfamily=font2, fontface="bold", angle = 90, lineheight = 0.28) +
   draw_label(x=0.042, y=0.48, label = "PEDESTRIAN\nSTREETS", color=Colors[3], size=200, fontfamily=font2, fontface="bold", angle = 90, lineheight = 0.28) +
-  draw_label(x=0.042, y=0.3, label = "SUBWAY\nLINES", color=Colors[4], size=200, fontfamily=font2, fontface="bold", angle = 90, lineheight = 0.28) +
+  draw_label(x=0.042, y=0.3, label = "TRAINS &\nSUBWAYS", color=Colors[4], size=200, fontfamily=font2, fontface="bold", angle = 90, lineheight = 0.28) +
   draw_label(x=0.042, y=0.11, label = "BODIES\nOF WATER", color=Colors[5], size=200, fontfamily=font2, fontface="bold", angle = 90, lineheight = 0.28) 
 
 
 ggsave("~/Desktop/Day 9 (Monochrome).png", height = 40, width = 35)
-
-
-
