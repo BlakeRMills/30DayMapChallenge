@@ -78,9 +78,9 @@ grid <- plot_grid(plotter(1703),
 
 ggdraw(grid) +
   draw_label(label = "Twitter: @BlakeRobMills | Source: New York Public Library & New York State Census | GitHub: BlakeRMills", x=0.5, y=0.022, color="#324727", fontface="bold", size=75, fontfamily = font2) +
-  draw_label(label="Old New York Population by Ward", x=0.5, y=0.95, size=275, fontface="bold", fontfamily = font1, color="#324727") +
-  draw_line(x=c(0, 0.15), y=c(0.95, 0.95), size=3.5, color="#324727") +
-  draw_line(x=c(0.85, 1), y=c(0.95, 0.95), size=3.5, color="#324727") +
+  draw_label(label="Old New York Population Over Time by Ward", x=0.5, y=0.95, size=275, fontface="bold", fontfamily = font1, color="#324727") +
+  draw_line(x=c(0, 0.05), y=c(0.95, 0.95), size=3.5, color="#324727") +
+  draw_line(x=c(0.95, 1), y=c(0.95, 0.95), size=3.5, color="#324727") +
   draw_label(label="From 1683 to 1938, New York organized itself into wards that served as electoral districts and other administrative functions. Maps show the population of wards\nover time using historical New York Census data from 1703 to 1855. Historical boundaries of wards are provided by the New York Public Library.", 
              x=0.5, y=0.86, size=105, lineheight=0.3, fontfamily=font2, color="#3d5f3c") +
   draw_label(label="1703", x=0.061, y=0.473, size=150, fontface="bold", angle=55, fontfamily = font3, color="#324727") +
@@ -109,5 +109,4 @@ ggdraw(grid) +
   
 
 
-ggsave("~/Desktop/OldNyc.png", height = 15, width = 30)
-
+ggsave("~/Desktop/Day 12 Population Map.png", height = 15, width = 30)
