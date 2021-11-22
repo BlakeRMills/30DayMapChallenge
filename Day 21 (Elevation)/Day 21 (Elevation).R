@@ -112,11 +112,13 @@ BuenosAiresRoads <- RoadEle(BuenosAiresEle[[1]], BuenosAires[[2]], BuenosAiresEl
 BerlinRoads <- RoadEle(BerlinEle[[1]], Berlin[[2]], BerlinEle[[1]]$cut)
 
 # Plotter
-plotter <- function(df, linesize, cityname, labels){
+plotter <- function(df, linesize, cityname, labels, levels){
   plot <- ggplot() +
     geom_sf(data=df, aes(color=level, fill=level), size=linesize) +
-    scale_color_manual(values = colors1, guide=guide_legend(nrow = 1)) +
-    scale_fill_manual(values = colors1, guide=guide_legend(nrow = 1)) +
+    scale_color_manual(values = colors1, guide=guide_legend(nrow = 1),
+                       breaks=levels) +
+    scale_fill_manual(values = colors1, guide=guide_legend(nrow = 1),
+                      breaks = levels) +
     theme_void() +
     coord_sf() +
     theme(legend.position = c(0.5, 1.025),
@@ -143,25 +145,29 @@ plotter <- function(df, linesize, cityname, labels){
     draw_label(label=labels[8], x=0.868, y=1.025, size=55, fontface="bold", color="grey95", fontfamily = font1) 
 }
 
-MilanPlot <- plotter(MilanRoads, 1, "Milan", c("< 110", "110-115", "115-120", "120-125", "125-130", "130-135", "135-140", "> 140"))
+MilanPlot <- plotter(MilanRoads, 1, "Milan", c("< 110", "110-115", "115-120", "120-125", "125-130", "130-135", "135-140", "> 140"),
+                     c("(-100,110]", "(110,115]", "(115,120]", "(120,125]", "(125,130]", "(130,135]", "(135,140]", "(140,2e+03]"))
 ggsave("~/Desktop/Milan.png", height = 15, width = 15)
 
-NycPlot <- plotter(NycRoads, 0.35, "New York", c("< 0", "0-5", "5-10", "10-15", "15-20", "20-25", "25-30", "> 30"))
-ggsave("~/Desktop/Nyc.png", height = 15, width = 15)
 
-#Originally at 0.2
-CdmxPlot <- plotter(CdmxRoads, 0.25, "Mexico City", c("< 2250", "2250-2450", "2450-2650", "2650-2850", "2850-3050", "3050-3250", "3250-3450", "> 3450"))
-ggsave("~/Desktop/Cdmx3.png", height = 15, width = 15)
+NycPlot <- plotter(NycRoads, 0.35, "New York", c("< 0", "0-5", "5-10", "10-15", "15-20", "20-25", "25-30", "> 30"),
+                   c("(-100,0]", "(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,2e+03]"))
+ggsave("~/Desktop/NewYork.png", height = 15, width = 15)
 
-LondonPlot <- plotter(LondonRoads, 0.4, "London", c("< 10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "> 70"))
-ggsave("~/Desktop/London3.png", height = 15, width = 15)
+CdmxPlot <- plotter(CdmxRoads, 0.25, "Mexico City", c("< 2250", "2250-2450", "2450-2650", "2650-2850", "2850-3050", "3050-3250", "3250-3450", "> 3450"),
+                    c("(-100,2.25e+03]", "(2.25e+03,2.45e+03]", "(2.45e+03,2.65e+03]", "(2.65e+03,2.85e+03]", "(2.85e+03,3.05e+03]", "(3.05e+03,3.25e+03]", "(3.25e+03,3.45e+03]", "(3.45e+03,5e+03]"))
+ggsave("~/Desktop/Cdmx.png", height = 15, width = 15)
 
-BerlinPlot <- plotter(BerlinRoads, 0.6, "Berlin", c("< 25", "25-30", "30-35", "35-40", "40-45", "45-50", "50-55", "> 55"))
+LondonPlot <- plotter(LondonRoads, 0.4, "London", c("< 10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "> 70"),
+                      c("(-100,10]", "(10,20]", "(20,30]", "(30,40]", "(40,50]", "(50,60]", "(60,70]", "(70,5e+03]"))
+ggsave("~/Desktop/London.png", height = 15, width = 15)
 
-BuenosAiresPlot <- plotter(BuenosAiresRoads, 0.9, "Buenos Aires", c("< 0", "0-5", "5-10", "10-15", "15-20", "20-25", "25-30", "> 30"))
+BuenosAiresPlot <- plotter(BuenosAiresRoads, 0.9, "Buenos Aires", c("< 0", "0-5", "5-10", "10-15", "15-20", "20-25", "25-30", "> 30"),
+                           c("(-100,0]", "(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,5e+03]"))
 ggsave("~/Desktop/BuenosAires.png", height = 15, width = 15)
 
-MumbaiPlot <- plotter(MumbaiRoads, 0.5, "Mumbai", c("< 0", "0-5", "5-10", "10-15", "15-20", "20-25", "25-30", "> 30"))
+MumbaiPlot <- plotter(MumbaiRoads, 0.5, "Mumbai", c("< 0", "0-5", "5-10", "10-15", "15-20", "20-25", "25-30", "> 30"),
+                      c("(-400,0]", "(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,5e+03]"))
 ggsave("~/Desktop/Mumbai.png", height = 15, width = 15)
 
 
@@ -171,8 +177,10 @@ ggsave("~/Desktop/Mumbai.png", height = 15, width = 15)
 ParisLabs <- c("< 30", "30-35", "35-40", "40-45", "45-50", "50-55", "55-60", "> 60")
 ParisPlot <- ggplot() +
   geom_sf(data=ParisRoads, aes(color=level, fill=level), size=1) +
-  scale_color_manual(values = colors1, guide=guide_legend(nrow = 1)) +
-  scale_fill_manual(values = colors1, guide=guide_legend(nrow = 1)) +
+  scale_color_manual(values = colors1, guide=guide_legend(nrow = 1),
+                     breaks=c("(-100,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,1e+03]")) +
+  scale_fill_manual(values = colors1, guide=guide_legend(nrow = 1),
+                    breaks=c("(-100,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,1e+03]")) +
   theme_void() +
   coord_sf() +
   theme(legend.position = c(0.5, 1.05),
@@ -203,8 +211,10 @@ ggsave("~/Desktop/Paris.png", height = 12, width = 15)
 BerlinLabs <- c("< 30", "30-35", "35-40", "40-45", "45-50", "50-55", "55-60", "> 60")
 BerlinPlot <- ggplot() +
   geom_sf(data=BerlinRoads, aes(color=level, fill=level), size=0.6) +
-  scale_color_manual(values = colors1, guide=guide_legend(nrow = 1)) +
-  scale_fill_manual(values = colors1, guide=guide_legend(nrow = 1)) +
+  scale_color_manual(values = colors1, guide=guide_legend(nrow = 1),
+                     breaks=c("(-100,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,5e+03]")) +
+  scale_fill_manual(values = colors1, guide=guide_legend(nrow = 1),
+                    breaks=c("(-100,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,5e+03]")) +
   theme_void() +
   coord_sf() +
   theme(legend.position = c(0.5, 1.025),
