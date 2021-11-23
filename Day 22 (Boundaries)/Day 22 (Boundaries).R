@@ -134,7 +134,7 @@ grid <- plot_grid(Poverty, Education, Rent,
         panel.background = element_rect(fill="#fdf9f5", color="#fdf9f5")) +
   draw_text(text="Twitter: @BlakeRobMills | Source: NYC Open Data | GitHub: BlakeRMills", x=0.5, y=0, size=80, color="#3f000a", fontface="bold", family=font1) +
   draw_text(text="Inequality in New York City", x=0.5, y=1.1, size=325, color="#3f000a", fontface="bold", family=font1) +
-  draw_text(text="Different ways of mapping disparities in New York City community districts.", x=0.5, y=1.042, size=110, color="#3f000a", family=font2) +
+  draw_text(text="Different ways of mapping disparities in New York City by community district.", x=0.5, y=1.042, size=110, color="#3f000a", family=font2) +
   draw_text(text="Poverty", x=0.17, y=0.985, size=170, color="#08306B", fontface="bold", family=font1) +
   draw_text(text="Education", x=0.5, y=0.985, size=170, color="#67000D", fontface="bold", family=font1) +
   draw_text(text="Rent Burden", x=0.833, y=0.985, size=170, color="#00441B", fontface="bold", family=font1) +
@@ -142,17 +142,17 @@ grid <- plot_grid(Poverty, Education, Rent,
   draw_text(text="Incarceration", x=0.5, y=0.48, size=170, color="#7F2704", fontface="bold", family=font1) +
   draw_text(text="Bodega-Supermarket Ratio", x=0.17, y=0.47, size=170, color="#49006A", fontface="bold", family=font1) +
   draw_text(text="% Living Below Poverty Line", x=0.17, y=0.615, size=90, color="#08306B", fontface="bold", family=font2) +
-  draw_text(text="% Adults w/o Highschool Degree", x=0.5, y=0.615, size=90, color="#67000D", fontface="bold", family=font2) +
+  draw_text(text="% Adults w/o High School Degree", x=0.5, y=0.615, size=90, color="#67000D", fontface="bold", family=font2) +
   draw_text(text="% Households Rent Burdened", x=0.833, y=0.615, size=90, color="#00441B", fontface="bold", family=font2) +
   draw_text(text="Bodegas per Supermarket", x=0.17, y=0.115, size=90, color="#49006A", fontface="bold", family=font2) +
   draw_text(text="Residents per 100k Incarcerated", x=0.5, y=0.115, size=90, color="#7F2704", fontface="bold", family=font2) +
   draw_text(text="Mcg of Fine Particulates per m3", x=0.833, y=0.115, size=90, color="#3F007D", fontface="bold", family=font2) +
-  draw_text(text="Rent Burden represent\nhouseholds paying 30%\nor more of income on rent\nin the past 12 months", x=0.75, y=0.85, size=85, color="#006D2C", lineheight=0.4, family=font2) + 
-  draw_text(text="Number of bodegas\nper supermarket is used as\na proxy for access to\nfresh foods in an area", x=0.085, y=0.35, size=85, color="#7A0177", lineheight=0.4, family=font2) +
+  draw_text(text="Rent Burden represents\nhouseholds paying 30%\nor more of income on rent\nin the past 12 months", x=0.75, y=0.85, size=85, color="#006D2C", lineheight=0.4, family=font2) + 
+  draw_text(text="Number of bodegas for\neach supermarket is used as\na proxy for access to\nfresh foods in an area", x=0.085, y=0.35, size=85, color="#7A0177", lineheight=0.4, family=font2) +
   draw_line(x=c(-2, 0.22), y=c(1.1, 1.1), color="#3f000a", size=3.5) +
   draw_line(x=c(0.78, 1.2), y=c(1.1, 1.1), color="#3f000a", size=3.5)
 
 
 # Save
-ggsave("~/Desktop/Day 22 (Boundaries)/Disparities.png", width = 35, height = 25)
+ggsave("~/Desktop/Day 22 (Boundaries)/NYC Disparities.png", width = 35, height = 25)
 
