@@ -53,6 +53,12 @@ MilanPrices <- read_csv("~/Desktop/Day 16 (Urban)/Data/Milan.csv") %>%
          price=price*1.13, 
          ppb = price/bedrooms) %>% filter(is.na(ppb)==FALSE)
 
+MunichPrices <- read_csv("~/Desktop/Munich.csv") %>% 
+  st_as_sf(coords = c("longitude", "latitude"), crs=4326) %>% dplyr::select(price, geometry, bedrooms) %>%
+  mutate(price = price %>% str_remove_all("\\$|,") %>% as.numeric(),
+         price=price*1.12, 
+         ppb = price/bedrooms) %>% filter(is.na(ppb)==FALSE)
+
 NycPrices <- read_csv("~/Desktop/Day 16 (Urban)/Data/Nyc.csv") %>% 
   st_as_sf(coords = c("longitude", "latitude"), crs=4326) %>% dplyr::select(price, geometry, bedrooms) %>%
   mutate(price = price %>% str_remove_all("\\$|,") %>% as.numeric(),
@@ -64,13 +70,13 @@ ParisPrices <- read_csv("~/Desktop/Day 16 (Urban)/Data/Paris.csv") %>%
          price=price*1.13, 
          ppb = price/bedrooms) %>% filter(is.na(ppb)==FALSE)
 
-RioPrices <- read_csv("~/Desktop/Day 16 (Urban)/Data/Rio.csv") %>% 
+RioPrices <- read_csv("~/Desktop/Side Projects/30 Day Map/Day 16 (Urban)/Data/Rio.csv") %>% 
   st_as_sf(coords = c("longitude", "latitude"), crs=4326) %>% dplyr::select(price, geometry, bedrooms) %>%
   mutate(price = price %>% str_remove_all("\\$|,") %>% as.numeric(),
          price=price*0.18, 
          ppb = price/bedrooms) %>% filter(is.na(ppb)==FALSE)
 
-SydneyPrices <- read_csv("~/Desktop/Day 16 (Urban)/Data/Sydney.csv") %>% 
+SydneyPrices <- read_csv("~/Desktop/Side Projects/30 Day Map/Day 16 (Urban)/Data/Sydney.csv") %>% 
   st_as_sf(coords = c("longitude", "latitude"), crs=4326) %>% dplyr::select(price, geometry, bedrooms) %>%
   mutate(price = price %>% str_remove_all("\\$|,") %>% as.numeric(),
          price=price*0.73, 
@@ -118,6 +124,16 @@ MilanBorder <- opq(bbox="Milan, Italy") %>%
   .$osm_multipolygons %>%
   select(osm_id, name, geometry) %>%
   filter(name =="Milano") 
+
+
+## Munich
+MunichBorder <- opq(bbox="Munich, Germany") %>%
+  add_osm_feature(key="admin_level", value="6") %>%
+  osmdata_sf() %>%
+  .$osm_multipolygons %>%
+  select(osm_id, name, geometry) %>%
+  filter(name =="München") 
+
 
 ## New York
 NycBorder <- opq(bbox="New York") %>%
@@ -169,10 +185,11 @@ BerlinRoads <- Roads(BerlinBorder, c(13.099, 52.6674, 13.7892, 52.337))
 LondonRoads <- Roads(LondonBorder, c(-0.55, 51.2911, 0.25, 51.744))
 #MexCityRoads <- Roads(MexicoCityBorder, "Mexico City, Mexico")
 MilanRoads <- Roads(MilanBorder, "Milan, Italy")
+MunichRoads <- Roads(MunichBorder, "Munich, Germany")
 NycRoads <- Roads(NycBorder, "New York")
 ParisRoads <- Roads(ParisBorder, "Paris, France")
-#RioRoads <- Roads(RioBorder, "Rio de Janeiro, Brazil")
-#SydneyRoads <- Roads(SydneyBorder, "Sydney, Australia")
+RioRoads <- Roads(RioBorder, c(-43.7956, -22.7547, -43.1378, -23.0860))
+SydneyRoads <- Roads(SydneyBorder, "Sydney, Australia")
 
 # Roads by Prices
 ColorGrid <- function(Roads, Prices, n){
@@ -204,12 +221,13 @@ ColorGrid <- function(Roads, Prices, n){
 AmsterdamColor <- ColorGrid(AmsterdamRoads, AmPrices, n=50)
 BerlinColor <- ColorGrid(BerlinRoads, BerlinPrices, n=100)
 LondonColor <- ColorGrid(LondonRoads, LondonPrices, n=125)
-#MexCityColor <- ColorGrid(MexCityRoads, MexicoPrices, n=100)
+MexCityColor2 <- ColorGrid(MexCityRoads, MexicoPrices, n=150)
 MilanColor <- ColorGrid(MilanRoads, MilanPrices, n=50)
+MunichColor <- ColorGrid(MunichRoads, MunichPrices, n=50)
 NycColor <- ColorGrid(NycRoads, NycPrices, n=150)
 ParisColor <- ColorGrid(ParisRoads, ParisPrices, n=50)
-#RioColor <- ColorGrid(RioRoads, RioPrices, n=150)
-#SydneyColor <- ColorGrid(SydneyRoads, SydneyPrices, n=100)
+RioColor <- ColorGrid(RioRoads, RioPrices, n=175)
+SydneyColor <- ColorGrid(SydneyRoads, SydneyPrices, n=175)
 
 
 
@@ -439,6 +457,45 @@ MilanFinal <- ggdraw(MilanPlot2) +
 
 ggsave("~/Desktop/Milan.png", height = 15, width=15)
 
+## Munich Final
+MunichPlot2 <- ggplot() +
+  geom_sf(data=MunichColor[[1]], alpha=0.2, size=0.5) +
+  geom_sf(data=MunichColor[[2]], aes(color=factor(MeanCat, levels=levels, labels=labels), 
+                                    fill=factor(MeanCat, levels=levels, labels=labels)), size=0.5) +
+  scale_color_manual(values = colors1,
+                     guide=guide_legend(nrow = 1)) +
+  scale_fill_manual(values = colors1,
+                    guide=guide_legend(nrow = 1)) +
+  theme_void() +
+  theme(legend.position = c(0.5, 1.036),
+        legend.direction = "horizontal",
+        legend.text = element_blank(),
+        legend.key.width = unit(2.75, "cm"),
+        legend.key.height = unit(0.75, "cm"),
+        legend.title = element_blank(),
+        plot.margin=margin(3, 0, 0, 0, "cm"))
+
+MunichFinal <- ggdraw(MunichPlot2) +
+  draw_label(label="Twitter: @BlakeRobMills | Source: Inside Airbnb | GitHub: BlakeRMills", x=0.5, y=0.02, size=50, fontface="bold", fontfamily = font1, color="#3f004f") +
+  draw_label(label="Munich", x=0.5, y=1.03, size=250, fontface="bold", fontfamily = font1, color="#3f004f") +
+  draw_label(label="Average cost per bedroom, per night (in USD) of Airbnbs in Munich. Streets are\ncolored to represent the daily costs. Light grey streets represent no Airbnbs in the area.",
+             x=0.5, y=0.962, size=60, fontfamily = font1, lineheight = 0.325, color="grey25") +
+  draw_label(label="<$50", x=0.214, y=0.914, size=45, fontface="bold", fontfamily = font1, color="grey15") +
+  draw_label(label="$50-$75", x=0.295, y=0.914, size=45, fontface="bold", fontfamily = font1, color="grey15") +
+  draw_label(label="$75-$100", x=0.377, y=0.914, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$100-$125", x=0.459, y=0.914, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$125-$150", x=0.541, y=0.914, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$150-$175", x=0.623, y=0.914, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$175-$200", x=0.706, y=0.914, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$200+", x=0.791, y=0.914, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  theme(panel.background = element_rect(color="#fdf9f5", fill="#fdf9f5"),
+        plot.background = element_rect(color="#fdf9f5", fill="#fdf9f5"),
+        plot.margin=margin(3, 0, 0, 0, "cm")) 
+
+ggsave("~/Desktop/Munich.png", height = 15, width=15)
+
+
+
 
 ## Nyc Final
 NycPlot2 <- ggplot() +
@@ -513,4 +570,119 @@ ParisFinal <- ggdraw(ParisPlot2) +
         plot.margin=margin(-1,  0, -5, 0, "cm")) 
 
 ggsave("~/Desktop/Paris.png", height = 12, width=15)
+
+
+
+## Mexico City Final
+MexPlot2 <- ggplot() +
+  geom_sf(data=MexCityColor2[[1]], alpha=0.2, size=0.25) +
+  geom_sf(data=MexCityColor2[[2]], aes(color=factor(MeanCat, levels=levels, labels=labels), 
+                                  fill=factor(MeanCat, levels=levels, labels=labels)), size=0.25) +
+  scale_color_manual(values = colors1,
+                     guide=guide_legend(nrow = 1)) +
+  scale_fill_manual(values = colors1,
+                    guide=guide_legend(nrow = 1)) +
+  theme_void() +
+  theme(legend.position = c(0.5, 1),
+        legend.direction = "horizontal",
+        legend.text = element_blank(),
+        legend.key.width = unit(2.75, "cm"),
+        legend.key.height = unit(0.75, "cm"),
+        legend.title = element_blank(),
+        plot.margin=margin(3, 0, 0, 0, "cm"))
+
+MexFinal <- ggdraw(MexPlot2) +
+  draw_label(label="Twitter: @BlakeRobMills | Source: Inside Airbnb | GitHub: BlakeRMills", x=0.5, y=0.02, size=50, fontface="bold", fontfamily = font1, color="#3f004f") +
+  draw_label(label="Mexico City", x=0.5, y=1.03, size=250, fontface="bold", fontfamily = font1, color="#3f004f") +
+  draw_label(label="Average cost per bedroom, per night (in USD) of Airbnbs in Mexico City. Streets are\ncolored to represent the daily costs. Light grey streets represent no Airbnbs in the area.",
+             x=0.5, y=0.962, size=60, fontfamily = font1, lineheight = 0.325, color="grey25") +
+  draw_label(label=">$50", x=0.214, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey15") +
+  draw_label(label="$50-$75", x=0.295, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey15") +
+  draw_label(label="$75-$100", x=0.377, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$100-$125", x=0.459, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$125-$150", x=0.541, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$150-$175", x=0.623, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$175-$200", x=0.706, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$200+", x=0.791, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  theme(panel.background = element_rect(color="#fdf9f5", fill="#fdf9f5"),
+        plot.background = element_rect(color="#fdf9f5", fill="#fdf9f5"),
+        plot.margin=margin(3, 0, 0, 0, "cm")) 
+
+ggsave("~/Desktop/Mexico.png", height = 15, width=15)
+
+
+## Mexico City Final
+SydneyPlot2 <- ggplot() +
+  geom_sf(data=SydneyColor[[1]], alpha=0.2, size=0.25) +
+  geom_sf(data=SydneyColor[[2]], aes(color=factor(MeanCat, levels=levels, labels=labels), 
+                                       fill=factor(MeanCat, levels=levels, labels=labels)), size=0.25) +
+  scale_color_manual(values = colors1,
+                     guide=guide_legend(nrow = 1)) +
+  scale_fill_manual(values = colors1,
+                    guide=guide_legend(nrow = 1)) +
+  theme_void() +
+  theme(legend.position = c(0.5, 1),
+        legend.direction = "horizontal",
+        legend.text = element_blank(),
+        legend.key.width = unit(2.75, "cm"),
+        legend.key.height = unit(0.75, "cm"),
+        legend.title = element_blank(),
+        plot.margin=margin(3, 0, 0, 0, "cm"))
+
+SydneyFinal <- ggdraw(SydneyPlot2) +
+  draw_label(label="Twitter: @BlakeRobMills | Source: Inside Airbnb | GitHub: BlakeRMills", x=0.5, y=0.02, size=50, fontface="bold", fontfamily = font1, color="#3f004f") +
+  draw_label(label="Sydney", x=0.5, y=1.03, size=250, fontface="bold", fontfamily = font1, color="#3f004f") +
+  draw_label(label="Average cost per bedroom, per night (in USD) of Airbnbs in Sydney. Streets are\ncolored to represent the daily costs. Light grey streets represent no Airbnbs in the area.",
+             x=0.5, y=0.959, size=60, fontfamily = font1, lineheight = 0.325, color="grey25") +
+  draw_label(label=">$50", x=0.214, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey15") +
+  draw_label(label="$50-$75", x=0.295, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey15") +
+  draw_label(label="$75-$100", x=0.377, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$100-$125", x=0.459, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$125-$150", x=0.541, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$150-$175", x=0.623, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$175-$200", x=0.706, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$200+", x=0.791, y=0.9145, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  theme(panel.background = element_rect(color="#fdf9f5", fill="#fdf9f5"),
+        plot.background = element_rect(color="#fdf9f5", fill="#fdf9f5"),
+        plot.margin=margin(3, 0, 0, 0, "cm")) 
+
+ggsave("~/Desktop/Sydney.png", height = 15, width=15)
+
+
+## Rio Final
+RioPlot2 <- ggplot() +
+  geom_sf(data=RioColor[[1]], alpha=0.2, size=0.25) +
+  geom_sf(data=RioColor[[2]], aes(color=factor(MeanCat, levels=levels, labels=labels), 
+                                     fill=factor(MeanCat, levels=levels, labels=labels)), size=0.25) +
+  scale_color_manual(values = colors1,
+                     guide=guide_legend(nrow = 1)) +
+  scale_fill_manual(values = colors1,
+                    guide=guide_legend(nrow = 1)) +
+  theme_void() +
+  theme(legend.position = c(0.5, 1.05),
+        legend.direction = "horizontal",
+        legend.text = element_blank(),
+        legend.key.width = unit(2.75, "cm"),
+        legend.key.height = unit(0.75, "cm"),
+        legend.title = element_blank(),
+        plot.margin=margin(0, 0, 0, 0, "cm"))
+
+RioFinal <- ggdraw(RioPlot2) +
+  draw_label(label="Twitter: @BlakeRobMills | Source: Inside Airbnb | GitHub: BlakeRMills", x=0.5, y=0.09, size=50, fontface="bold", fontfamily = font1, color="#3f004f") +
+  draw_label(label="Rio de Janeiro", x=0.5, y=1.03, size=250, fontface="bold", fontfamily = font1, color="#3f004f") +
+  draw_label(label="Average cost per bedroom, per night (in USD) of Airbnbs in Rio de Janeiro. Streets are\ncolored to represent the daily costs. Light grey streets represent no Airbnbs in the area.",
+             x=0.5, y=0.94, size=60, fontfamily = font1, lineheight = 0.325, color="grey25") +
+  draw_label(label=">$50", x=0.214, y=0.867, size=45, fontface="bold", fontfamily = font1, color="grey15") +
+  draw_label(label="$50-$75", x=0.295, y=0.867, size=45, fontface="bold", fontfamily = font1, color="grey15") +
+  draw_label(label="$75-$100", x=0.377, y=0.867, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$100-$125", x=0.459, y=0.867, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$125-$150", x=0.541, y=0.867, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$150-$175", x=0.623, y=0.867, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$175-$200", x=0.706, y=0.867, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  draw_label(label="$200+", x=0.791, y=0.867, size=45, fontface="bold", fontfamily = font1, color="grey95") +
+  theme(panel.background = element_rect(color="#fdf9f5", fill="#fdf9f5"),
+        plot.background = element_rect(color="#fdf9f5", fill="#fdf9f5"),
+        plot.margin=margin(3, 0, -2, 0, "cm")) 
+
+ggsave("~/Desktop/Rio.png", height = 12, width=15)
 
