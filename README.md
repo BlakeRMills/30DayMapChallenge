@@ -1,5 +1,5 @@
 # 30DayMapChallenge
-Data, Code, and Visualizations for the #30DayMapChallenge
+Data, Code, and Visualizations for the #30DayMapChallenge. A collection of my entries can also be found on [my website](https://www.blakerobertmills.com/my-work/visualizations).
 
 
 ## [Day 1 (Points)](https://twitter.com/BlakeRobMills/status/1455383350613626883)
