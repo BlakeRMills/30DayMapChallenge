@@ -46,7 +46,6 @@ darknames <- sort(Neigh$name)[46:55]
 Neigh <- Neigh %>%
   mutate(label_back = ifelse(name %in% darknames, "dark", "light"))
 
-
 # Map
 set.seed(10)
 plot <- ggplot() +
@@ -63,6 +62,5 @@ ggdraw(plot) +
   draw_label(label="Twitter: @BlakeRobMills | Source: Open Street Maps | GitHub: BlakeRMills", color=moma.colors("vonHeyl")[3], x=0.5, y=0.0175, size=30, fontface = "bold", fontfamily = font) +
   draw_label(label = "Manhattan", x=0.05, y=0.9, hjust=0, size=165, color=moma.colors("vonHeyl")[3], fontfamily=font, fontface="bold")
 
-
-ggsave("~/Desktop/Day 02 - Lines.png", height = 9, width = 6)
+ggsave("~/30DayMapChallenge/2023/Day 02 - Lines/Day 02 - Lines.png", height = 9, width = 6)
 
