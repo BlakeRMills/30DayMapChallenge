@@ -1,14 +1,14 @@
 # Libraries
-library(rjson)
-library(tidyverse)
+library(cowplot)
 library(data.table)
 library(geojsonio)
-library(sf)
-library(osmdata)
 library(MoMAColors)
+library(osmdata)
+library(rjson)
+library(sf)
 library(showtext)
-library(cowplot)
 library(sysfonts)
+library(tidyverse)
 
 # Aes
 showtext_auto()
@@ -113,5 +113,5 @@ ggdraw(plot) +
   draw_label(label="Days on Display", color=moma.colors("Ernst")[8], x=0.286, y=0.78, size=50, fontfamily = font, fontface = "bold") +
   theme(plot.background = element_rect(fill="#fdf9f5", color="#fdf9f5"))
 
-ggsave("~/Desktop/Day 01 - Points.png", height = 8, width = 7)
+ggsave("~/30DayMapChallenge/2023/Day 01 - Points/Day 01 - Points.png", height = 8, width = 7)
 
