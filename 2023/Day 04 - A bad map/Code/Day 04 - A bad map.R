@@ -75,7 +75,7 @@ ggdraw(plot) +
   draw_label(label = "Areas yet to be graffitied", x=0.79, y=0.075, hjust=1, size=32,color=moma.colors("OKeeffe")[1], fontfamily=font) +
   draw_label(label = "Areas frequently graffitied", x=0.72, y=0.495, hjust=0, size=32,color=moma.colors("OKeeffe")[6], fontfamily=font) +
   draw_label(label = "Frequency of Graffiti", x=0.68, y=0.3, angle=90, size=50,color=moma.colors("OKeeffe")[1], fontfamily=font) +
-  draw_label(label = "Plot displays Manhattan streets colored by\nthe number of 311 calls of reported graffiti\nin the last 10 years.", x=0.05, y=0.72, hjust=0, size=30, color=moma.colors("OKeeffe")[1], fontfamily=font, lineheight = 0.4) +
+  draw_label(label = "Plot displays Manhattan streets colored by\nthe number of 311 calls of reported graffiti\nin the last 10 years (2013-2023).", x=0.05, y=0.72, hjust=0, size=30, color=moma.colors("OKeeffe")[1], fontfamily=font, lineheight = 0.4) +
   annotate(geom = "curve", x=0.8, xend=0.81, y=0.075, yend=0.125, color=moma.colors("OKeeffe")[1], arrow = arrow(length = unit(3, "mm")), curvature = 0.85, linewidth=0.75) +
   annotate(geom = "curve", x=0.71, xend=0.7, y=0.495, yend=0.45, color=moma.colors("OKeeffe")[6], arrow = arrow(length = unit(3, "mm")), curvature = 0.85, linewidth=0.75)
 
