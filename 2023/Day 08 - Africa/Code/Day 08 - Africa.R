@@ -14,7 +14,11 @@ font <- "Advent Pro"
 font_add_google(font)
 pal <- moma.colors("Liu", 3)
 sf_use_s2(FALSE)
-city_name <- "Cairo"
+city_name <- "Lagos"
+
+# Cairo - 1992, 2003, 2013
+# Kinshasa  - 1994, 2000, 2013
+# Lagos - 1984, 2000, 2013
 
 # Margins for the subtitle to align properly
 l_margin_t <- -0.25 # Lagos
@@ -52,13 +56,13 @@ city_3_r <- st_intersection(city_roads, city_3)
 # Plot
 
 plot <- ggplot() +
-  geom_sf(data=city_3_r, color=pal[1], alpha=1, linewidth=0.04) +
-  geom_sf(data=city_2_r, color=pal[2], alpha=1, linewidth=0.04) +
-  geom_sf(data=city_1_r, color=pal[3], alpha=1, linewidth=0.04) +
+  geom_sf(data=city_3_r, color=pal[1], alpha=1, linewidth=0.1) +
+  geom_sf(data=city_2_r, color=pal[2], alpha=1, linewidth=0.1) +
+  geom_sf(data=city_1_r, color=pal[3], alpha=1, linewidth=0.1) +
   theme_void() +
-  ggtitle(paste("Map displays the roads of ", city_name, " colored by the urban extent of city in <span style = 'color:#97c124'>**1984**</span>,  <span style = 'color:#9b5c1c'>**2000**</span>, and <span style = 'color:#9fd7bd'>**2013**</span>.", sep="")) +
+  ggtitle(paste("Map displays the roads of ", city_name, " colored by the urban extent of city in <span style = 'color:#97c124'>**1994**</span>,  <span style = 'color:#9b5c1c'>**2000**</span>, and <span style = 'color:#9fd7bd'>**2013**</span>.", sep="")) +
   theme(plot.margin = margin(0, 0, -2, 0, "cm"),
-        plot.title = element_textbox(hjust=0.5, color="white", size=28, family=font, lineheight = 0.4, margin = margin(c_margin_t, 0, c_margin_b, 0, "cm")))
+        plot.title = element_textbox(hjust=0.5, color="white", size=28, family=font, lineheight = 0.4, margin = margin(k_margin_t, 0, k_margin_b, 0, "cm")))
 
 ggdraw(plot) +
   theme(plot.background = element_rect(fill="#111509", color="#111509")) +
@@ -66,5 +70,5 @@ ggdraw(plot) +
   draw_label(label="Twitter: @BlakeRobMills | Source: Atlas of Urban Expansion & Open Street Maps | GitHub: BlakeRMills", color=pal[3], x=0.5, y=0.0225, size=28, fontface = "bold", fontfamily = font) 
 
 
-ggsave(paste("~/30DayMapChallenge/2023/Day 08 - Africa/", city_name, ".png", sep=""), width = 7, height = 8.5)
+ggsave(paste("~/30DayMapChallenge/2023/Day 08 - Africa/", city_name, ".png", sep=""), width = 7, height = 7)
 
