@@ -14,7 +14,7 @@ font <- "Advent Pro"
 font_add_google(font)
 pal <- moma.colors("Liu", 3)
 sf_use_s2(FALSE)
-city_name <- "Lagos"
+city_name <- "Kinshasa"
 
 # Cairo - 1992, 2003, 2013
 # Kinshasa  - 1994, 2000, 2013
