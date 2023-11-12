@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en"><Esri><CreaDate>20151221</CreaDate><CreaTime>23165600</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="c:\program files (x86)\arcgis\desktop10.2\ArcToolbox\Toolboxes\Conversion Tools.tbx\FeatureToRaster" Date="20151221" Time="231656">FeatureToRaster ftpt_with_smallGaps Value C:\Urban_Landscape_Analysis_Data_200cities\Output\Bogota\cityBoundary_smallGaps_filled_t2.img 30</Process></lineage></DataProperties></Esri></metadata>
