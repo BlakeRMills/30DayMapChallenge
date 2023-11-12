@@ -1,13 +1,13 @@
 # Libraries
-library(sf)
 library(cowplot)
-library(elevatr)
-library(tidyverse)
-library(raster)
 library(geojsonio)
+library(elevatr)
+library(MoMAColors)
+library(raster)
+library(sf)
 library(showtext)
 library(sysfonts)
-
+library(tidyverse)
 # Aes
 showtext_auto()
 font <- "Advent Pro"
