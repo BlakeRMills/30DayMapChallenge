@@ -59,7 +59,7 @@ p <- ggplot() +
 ggdraw(p) +
   theme(plot.background = element_rect(fill="grey15")) +
   draw_text(text="Manhattan Monthly\nRent in 1940", x=0.04, y=0.925, fontface="bold", family=font, size=190, color="white", hjust=0, lineheight = 0.3) +
-  draw_text(text="Map displays Manhattan blocks colors by the average monthly rent in 1940.", x=0.04, y=0.84, family=font, size=45, color="white", hjust=0, lineheight = 0.3) +
+  draw_text(text="Map displays Manhattan blocks colored by the average monthly rent in 1940.", x=0.04, y=0.84, family=font, size=45, color="white", hjust=0, lineheight = 0.3) +
   draw_text(text="Average Monthly Rent", x=0.05, y=0.67, family=font, fontface="bold", size=80, color="white", angle = 90, hjust=0.5) +
   draw_label(label="Twitter: @BlakeRobMills | Source: Data from ConEd (1940), Map through BrooklynHistory.org | GitHub: BlakeRMills", color="white", x=0.5, y=0.0175, size=50, fontface = "bold", fontfamily = font) 
 
