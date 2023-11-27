@@ -112,7 +112,7 @@ ggdraw() +
   draw_text(text = "Proposed Central Park", x=0.2, y=0.8, color=pal[1], family=font, size=40) + 
   draw_text(text="Map shows the wards of New York City in 1852.\nNote: The roads displayed are current roads and do not\naccurately represents the roads in 1852.",
             x=0.98, y=0.12, lineheight=0.4, color=pal[1], size=45, family=font, hjust=1) +
-  draw_text(text="Twitter: @BlakeRobMills | Source: Brooklyn Library | GitHub: BlakeRMills", color=pal[1], x=0.5, y=0.015, size=40, fontface = "bold", family = font)  +
+  draw_text(text="Twitter: @BlakeRobMills | Source: Brooklyn Public Library | GitHub: BlakeRMills", color=pal[1], x=0.5, y=0.015, size=40, fontface = "bold", family = font)  +
   draw_line(x=c(0.95, 0.97), y=c(0.95, 0.9625), color=pal[1], arrow=arrow(length = unit(0.75, "lines")), size=1.25) +
   draw_text(x=0.945, y=0.945, text="N", size=100, family=font, color=pal[1], hjust=1, fontface="bold")
 
