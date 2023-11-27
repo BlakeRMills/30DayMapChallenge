@@ -23,7 +23,7 @@ pop <- read_sf("~/Desktop/NYCDen.geojson") %>%
 # Map
 p <- 
   ggplot() +
-  geom_sf(data=nyc_den, aes(fill=population), color="transparent") +
+  geom_sf(data=pop, aes(fill=population), color="transparent") +
     scale_fill_moma_c("ustwo", direction = -1) +
    # ggtitle("Population Density of\nNew York City") +
   theme_void() +
@@ -32,6 +32,11 @@ p <-
         #  plot.title = element_text(size=20, hjust=0, face = "bold", lineheight = 0.4)
           )
 
-plot_gg(p, multicore = TRUE,  width=8, height=6.285714, zoom=.75, sunangle = 220, theta = 30, phi = 50, solidcolor='#fdf9f5', 
+plot_gg(p, multicore = TRUE,  width=8, height=6.285714, zoom=.75, sunangle = 220, theta = 30, phi = 60, solidcolor='#fdf9f5', 
         verbose = T, windowsize = c(1400, 866), scale = 500, raytrace = T, triangulate = T)
+
+render_highquality("~/Desktop/test.png")
+
+plot_3d(heightmap = as.matrix(pop))
+
 render_snapshot("~/30DayMapChallenge/2023/Day 23 - 3D/Day 23 - 3D", width=14, height = 11)
